@@ -6,10 +6,11 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QLineEdit, QPushB
 
 class Gen:
     def __init__(self):
-        self._all_chars = [i for i in (ascii_letters + digits + punctuation) * 100] #9400 total chars
+        self._all_chars = [i for i in (ascii_letters + digits + punctuation) * 1000] #9400 total chars
 
-    key_gen = lambda self, length: ''.join(sample(self._all_chars, 9400)[:length])
-    pat_gen = lambda self, length: ''.join(sample(self._all_chars, 6200)[:length]).translate(str.maketrans(punctuation, ' '*len(punctuation))).replace(' ', '')
+    
+    key_gen = lambda self, length: ''.join(sample(self._all_chars, min(length, len(self._all_chars)))).translate(''.maketrans('"\'','  '))
+    pat_gen = lambda self, length: ''.join(sample(self._all_chars, min(length, len(self._all_chars)))).translate(str.maketrans(punctuation, ' '*len(punctuation))).replace(' ', '')
 
 class GenGUI(QMainWindow):
     def __init__(self):
@@ -18,12 +19,12 @@ class GenGUI(QMainWindow):
         self.initUI()
 
     def initUI(self):
-        key_gen_label = QLabel("Key Generator (Max Output: 9400 in length)\nDefault Length: 64")
+        key_gen_label = QLabel("Key Generator (Default Length: 64)")
         self.key_gen_input = QLineEdit()
         self.key_gen_output = QTextEdit()
         self.key_gen_output.setReadOnly(True)
 
-        pat_label = QLabel("Personal Access Token (Max Output: 6200 in length)\nDefault Length: 52")
+        pat_label = QLabel("Personal Access Token (Default Length: 52)")
         self.pat_input = QLineEdit()
         self.pat_output = QTextEdit()
         self.pat_output.setReadOnly(True)
@@ -31,7 +32,7 @@ class GenGUI(QMainWindow):
         self.key_gen_button = QPushButton("Generate Key")
         self.key_gen_button.clicked.connect(self.run_key_gen)
 
-        self.pat_button = QPushButton("Generate Personal Access Token")
+        self.pat_button = QPushButton("Generate PAT")
         self.pat_button.clicked.connect(self.run_pat_gen)
 
         layout = QVBoxLayout()
