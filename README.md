@@ -37,3 +37,5 @@ The PyQt Key Generator is a graphical user interface (GUI) application built wit
 The generated PAT will appear in the "Personal Access Token" output area.
 
 # Output
+<img width="458" alt="Screen Shot 2023-07-13 at 2 29 56 PM" src="https://github.com/yousefabuz17/KeyGenerator/assets/68834704/b646356d-5003-4f9b-bbff-9b333b028453">
+<img width="458" alt="Screen Shot 2023-07-13 at 2 30 22 PM" src="https://github.com/yousefabuz17/KeyGenerator/assets/68834704/e507f26f-0809-47e6-a481-43be78147569">
