@@ -51,14 +51,20 @@ class GenGUI(QMainWindow):
         self.pat_input.returnPressed.connect(self.run_pat_gen)
 
     def run_key_gen(self):
-        key_length = int(self.key_gen_input.text()) if self.key_gen_input.text().strip() else 64 #Default length
-        generated_key = Gen().key_gen(key_length)
-        self.key_gen_output.setPlainText(generated_key)
+        try:
+            key_length = int(self.key_gen_input.text()) if self.key_gen_input.text().strip() else 64 #Default length
+            generated_key = Gen().key_gen(key_length)
+            self.key_gen_output.setPlainText(generated_key)
+        except ValueError:
+            self.key_gen_output.setPlainText('Integers only')
 
     def run_pat_gen(self):
-        pat_length = int(self.pat_input.text()) if self.pat_input.text().strip() else 52 #Default length
-        generated_pat = Gen().pat_gen(pat_length)
-        self.pat_output.setPlainText(generated_pat)
+        try:
+            pat_length = int(self.pat_input.text()) if self.pat_input.text().strip() else 52 #Default length
+            generated_pat = Gen().pat_gen(pat_length)
+            self.pat_output.setPlainText(generated_pat)
+        except ValueError:
+            self.key_gen_output.setPlainText('Integers only')
 
 def main():
     app = QApplication(sys.argv)
