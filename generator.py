@@ -1,16 +1,15 @@
 import sys
 
-from random import sample
+from random import SystemRandom
 from string import ascii_letters, digits, punctuation
 from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QLineEdit, QPushButton, QVBoxLayout, QWidget, QTextEdit
 
 class Gen:
     def __init__(self):
         self._all_chars = [i for i in (ascii_letters + digits + punctuation) * 1000] #9400 total chars
-
-    
-    key_gen = lambda self, length: ''.join(sample(self._all_chars, min(length, len(self._all_chars)))).translate(''.maketrans('"\'','  '))
-    pat_gen = lambda self, length: ''.join(sample(self._all_chars, min(length, len(self._all_chars)))).translate(str.maketrans(punctuation, ' '*len(punctuation))).replace(' ', '')
+        self._r = SystemRandom()
+    key_gen = lambda self, length: ''.join(self._r.sample(self._all_chars, min(length, len(self._all_chars)))).translate(''.maketrans('"\'','  '))
+    pat_gen = lambda self, length: ''.join(self._r.sample(self._all_chars, min(length, len(self._all_chars)))).translate(str.maketrans(punctuation, ' '*len(punctuation))).replace(' ', '')
 
 class GenGUI(QMainWindow):
     def __init__(self):
